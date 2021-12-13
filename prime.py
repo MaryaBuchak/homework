@@ -1,12 +1,11 @@
 import random
 
-def prime(n):
-    a = random.randint(2, n - 1)
-    if a**(n-1) % n == 1:
-        return True
-    else:
-        return False
+def ferma(n):
+    for i in range(25):
+        if pow(random.randint(2, n - 1), n-1, n) != 1:
+            return False
+    return True
 
-print("Введите число (пожалуйста, не число Кармайкла): ")
+print("Введите число: ")
 a = int(input())
-print(prime(a))
+print(ferma(a), '\n')
