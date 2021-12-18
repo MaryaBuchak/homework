@@ -8,13 +8,13 @@ class Ring18:
         return '{}'.format(self.v)
 
     def __add__(self, other):
-        return (self.v + other.v) % 18
+        return self.v + other.v
 
     def __sub__(self, other):
-        return (self.v - other.v) % 18
+        return self.v - other.v
 
     def __mul__(self, other):
-        return (self.v * other.v) % 18
+        return self.v * other.v
 
     def __eq__(self, other):
         return self.v == other.v
