@@ -1,72 +1,83 @@
 import random
 
-class ring_18:
-     def sum(self, d, o):
-         return (d + o) % 18
+class Ring18:
+    def __init__(self, v):
+        self.v = v % 18
 
-     def multiply(self, g, o):
-         return (g * o) % 18
+    def __str__(self):
+        return '{}'.format(self.v)
 
-love = ring_18()
-d = random.randint(0, 19)
-o = random.randint(0, 19)
-g = random.randint(0, 19)
+    def __add__(self, other):
+        return (self.v + other.v) % 18
+
+    def __sub__(self, other):
+        return (self.v - other.v) % 18
+
+    def __mul__(self, other):
+        return (self.v * other.v) % 18
+
+    def __eq__(self, other):
+        return self.v == other.v
+
+d = Ring18(random.randint(-1000, 1000))
+o = Ring18(random.randint(-1000, 1000))
+g = Ring18(random.randint(-1000, 1000))
 
 print(d, o, g)
 
 print("Ассоциативность сложения")
-h = love.sum(d, love.sum(o, g))
+h = Ring18(d + Ring18(o + g))
 print(h)
-p = love.sum(love.sum(d, o), g)
+p = Ring18(Ring18(d + o) + g)
 print(p)
-print(h == p)
+print(h.v == p.v)
 
 print("Нейтральный элемент по сложению")
-h = love.sum(0, d)
+h = Ring18(Ring18(0) + d)
 print(h)
-p = love.sum(d, 0)
+p = Ring18(d + Ring18(0))
 print(p)
 print(h == p)
 
 print("Обратимость сложения")
-h = love.sum(d, -d)
+h = Ring18(d - d)
 print(h)
-p = love.sum(-d, d)
+p = Ring18(d - d)
 print(p)
 print(h == p)
 
 print("Коммутативность сложения")
-h = love.sum(d, o)
+h = Ring18(d + o)
 print(h)
-p = love.sum(o, d)
+p = Ring18(o + d)
 print(p)
 print(h == p)
 
 print("Ассоциативность умножения")
-h = love.multiply(d, love.multiply(o, g))
+h = Ring18(d * Ring18(o + g))
 print(h)
-p = love.multiply(love.multiply(d, o), g)
+p = Ring18(Ring18(d * o) * g)
 print(p)
 print(h == p)
 
 print("Нейтральный элемент по умножению")
-h = love.multiply(1, d)
+h = Ring18(Ring18(1) * d)
 print(h)
-p = love.multiply(d, 1)
+p = Ring18(d * Ring18(1))
 print(p)
 print(h == p)
 
 print("Коммутативность умножению")
-h = love.multiply(d, o)
+h = Ring18(d * o)
 print(h)
-p = love.multiply(o, d)
+p = Ring18(o * d)
 print(p)
 print(h == p)
 
-print("Диструбитовность")
-h = love.multiply(d, love.sum(o, g))
+print("Дистрибутивность")
+h = Ring18(d * Ring18(o + g))
 print(h)
-p = love.sum(love.sum(d, o), love.sum(d, g))
+p = Ring18(Ring18(d * o) + Ring18(d * g))
 print(p)
 print(h == p)
 
