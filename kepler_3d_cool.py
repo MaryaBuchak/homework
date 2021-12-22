@@ -1,5 +1,3 @@
-Python 3.10.1 (tags/v3.10.1:2cd268a, Dec  6 2021, 19:10:37) [MSC v.1929 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license()" for more information.
 from abc import ABC, abstractmethod
 import numpy as np
 from numpy import array as vec
@@ -99,33 +97,7 @@ class Universe3D(Universe):
             # Никаких конкретных законов не реализует, просто нечто отрицательное =)
             return -self.k / dist ** 2
 
-class Universe2D(Universe):
-    def __init__(self,
-                 G,  # гравитационная постоянная
-                 k,  # коэффициент при упругом соударении
-                 collision_distance  # всё-таки это не точки
-                 ):
-        super().__init__()
-        self.G = G
-        self.k = k
-        self.collision_distance = collision_distance
-
-    def gravity_flow_dencity_per_1_1(self, dist):
-        # будем считать, что отскакивают точки друг от друга резко,
-        # но стараться не допускать этого
-
-        if dist > self.collision_distance:
-            # Ситуация с обычным потоком поля — просто притяжение
-            return self.G / dist ** 2
-        else:
-            # Отталкивание при соударении (притяжение убираем).
-            # К гравитации не относится, т.к. имеет скорее электростатическую
-            # природу, так что это sort of hack.
-            # Никаких конкретных законов не реализует, просто нечто отрицательное =)
-            return -self.k / dist ** 2
-
-
-u = Universe2D(MODEL_G, COLLISION_COEFFICIENT, COLLISION_DISTANCE)
+u = Universe3D(MODEL_G, COLLISION_COEFFICIENT, COLLISION_DISTANCE)
 # u = Universe3D(MODEL_G, 20, 4)
 
 bodies = [
