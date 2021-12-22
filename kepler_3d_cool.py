@@ -137,5 +137,3 @@ def plt_kepler(same_fig=True):
 
 
 plt_kepler()
-
-print("\n")
