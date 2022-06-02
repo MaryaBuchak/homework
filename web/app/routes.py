@@ -1,8 +1,8 @@
 from flask import render_template, url_for
 from app import app
 
-@app.route('/')
-@app.route('/title')
+@app.route('/', methods = ['GET', 'POST'])
+@app.route('/title', methods = ['GET', 'POST'])
 def title():
     return render_template(
         'title.html'
